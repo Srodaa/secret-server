@@ -19,6 +19,12 @@ class SecretService {
         $secret = $this->secretModel->getSecretByHash($hash);
         if (!$secret) return null;
 
+        $createdAt = strtotime($secret['created_at']);
+        $ttl = $secret['expire_after_time'] * 20;
+        if ($ttl > 0 && ((time() - 7200) - $createdAt) > $ttl) { //Az adatbázis 2 órával le van maradva
+            $this->secretModel->deleteByHash($hash);
+            return null;
+        }
 
         $this->secretModel->decreaseViews($hash);
         if($secret['expire_after_views'] - 1 <= 0) {
