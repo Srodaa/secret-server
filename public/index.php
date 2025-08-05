@@ -6,6 +6,7 @@ use App\Database\Database;
 use App\Model\Secret;
 use App\Service\SecretService;
 
+date_default_timezone_set('Europe/Budapest');
 
 $config = require "../config/config.php";
 $db = (new Database($config))->getConnection();
@@ -21,5 +22,5 @@ if ($path === '/secret' && $method === 'POST') {
 }elseif (preg_match('#/secret/([a-zA-Z0-9]+)#', $path, $matches) && $method === 'GET') {
     $controller->getSecret(['hash' => $matches[1]]);
 } else {
-    return "";
+    return http_response_code(404);
 }
