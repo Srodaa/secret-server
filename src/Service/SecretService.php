@@ -14,4 +14,10 @@ class SecretService {
     public function createSecret($data) {
         return $this->secretModel->create($data['secret'], $data['expireAfterViews'], $data['expireAfterTime']);
     }
+
+    public function getSecret($hash) {
+        $secret = $this->secretModel->getSecretByHash($hash);
+        if (!$secret) return null;
+        return $secret;
+    }
 }

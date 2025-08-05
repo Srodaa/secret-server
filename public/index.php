@@ -18,6 +18,8 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($path === '/secret' && $method === 'POST') {
     $controller->create();
+}elseif (preg_match('#/secret/([a-zA-Z0-9]+)#', $path, $matches) && $method === 'GET') {
+    $controller->getSecret(['hash' => $matches[1]]);
 } else {
     return "";
 }

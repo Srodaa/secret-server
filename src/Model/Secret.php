@@ -16,4 +16,10 @@ class Secret {
         $stmt->execute([$hash, $secretText, $expireAfterViews, $expireAfterTime]);
         return $hash;
     }
+
+    public function getSecretByHash($hash) {
+        $stmt = $this->db->prepare("SELECT * FROM defaultdb.secrets WHERE hash = ?");
+        $stmt->execute([$hash]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

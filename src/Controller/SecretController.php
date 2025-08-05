@@ -23,4 +23,12 @@ class SecretController {
         ];
         echo json_encode($responseData);
     }
+
+    public function getSecret($params) {
+        $secret = $this->secretService->getSecret($params['hash']);
+        if (!$secret){
+            return http_response_code(404);
+        }
+        echo json_encode($secret);
+    }
 }
