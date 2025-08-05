@@ -18,6 +18,13 @@ class SecretService {
     public function getSecret($hash) {
         $secret = $this->secretModel->getSecretByHash($hash);
         if (!$secret) return null;
+
+
+        $this->secretModel->decreaseViews($hash);
+        if($secret['expire_after_views'] - 1 <= 0) {
+            $this->secretModel->deleteByHash($hash);
+        }
+
         return $secret;
     }
 }

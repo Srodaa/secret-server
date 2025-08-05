@@ -22,4 +22,14 @@ class Secret {
         $stmt->execute([$hash]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function decreaseViews($hash) {
+        $stmt = $this->db->prepare("UPDATE defaultdb.secrets SET expire_after_views = expire_after_views - 1 WHERE hash = ?");
+        $stmt->execute([$hash]);
+    }
+
+    public function deleteByHash($hash) {
+        $stmt = $this->db->prepare("DELETE FROM defaultdb.secrets WHERE hash = ?");
+        $stmt->execute([$hash]);
+    }
 }
