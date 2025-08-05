@@ -5,7 +5,8 @@ FROM php:8.2-apache
 RUN a2enmod rewrite
 
 # Install PDO MySQL and other PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && apt-get install -y libzip-dev zip unzip \
+    && docker-php-ext-install pdo pdo_mysql zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
