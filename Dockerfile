@@ -16,6 +16,8 @@ WORKDIR /var/www/html
 # Copy source code to container
 COPY . .
 
+RUN composer install --no-dev --optimize-autoloader
+
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html
 
