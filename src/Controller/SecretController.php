@@ -3,8 +3,6 @@ namespace App\Controller;
 
 use App\Service\ResponseFormatter;
 use App\Service\SecretService;
-use http\Env\Request;
-use http\Env\Response;
 
 class SecretController {
     private $secretService;
