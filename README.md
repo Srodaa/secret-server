@@ -25,3 +25,4 @@ Példa egy JSON válaszra:
     "created_at": "2025-08-05 22:40:12"
 }
 ```
+A feladat [itt](https://github.com/ngabesz-wse/secret-server-task) található meg.
