@@ -20,8 +20,8 @@ class SecretService {
         if (!$secret) return null;
 
         $createdAt = strtotime($secret['created_at']);
-        $ttl = $secret['expire_after_time'] * 20;
-        if ($ttl > 0 && ((time() - 7200) - $createdAt) > $ttl) { //Az adatbázis 2 órával le van maradva
+        $ttl = $secret['expire_after_time'] * 60;
+        if ($ttl > 0 && (time() - $createdAt) > $ttl) {
             $this->secretModel->deleteByHash($hash);
             return null;
         }
